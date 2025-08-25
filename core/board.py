@@ -1,2 +1,2 @@
-class board:
+class Board:
     pass
