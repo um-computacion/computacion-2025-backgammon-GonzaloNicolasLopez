@@ -33,5 +33,26 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.__contenedor__[12], ["Blancas"]*5)
         self.assertEqual(board.__contenedor__[23], ["Blancas"]*2)
 
+
+
+   
+    def test_mover_ficha_fuera_de_rango(self):
+        board = Board()
+        resultado = board.mover_ficha(-1, 5, "Blancas")
+        self.assertFalse(resultado)
+        resultado = board.mover_ficha(5, 24, "Blancas")
+        self.assertFalse(resultado)
+
+    def test_mover_ficha_color_incorrecto(self):
+        board = Board()
+        resultado = board.mover_ficha(0, 1, "Blancas")
+        self.assertFalse(resultado)
+
+    def test_mover_ficha_sin_fichas(self):
+        board = Board()
+        resultado =board.mover_ficha(2, 3, "Blancas")
+        self.assertFalse(resultado)
+
+
 if __name__ == "__main__":
      unittest.main()
