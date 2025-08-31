@@ -54,5 +54,36 @@ class TestBoard(unittest.TestCase):
         self.assertFalse(resultado)
 
 
+    def test_comer_ficha(self):
+        self.board = Board()
+        self.board.__contenedor__[4] = ["Negras"]
+        self.board.reserva() 
+        resultado = self.board.comer_ficha(4, "Blancas")
+        self.assertEqual(self.board.__contenedor__[4], ["Blancas"])
+        self.assertEqual(self.board.__reserva__["Negras"], 1)
+        self.assertFalse(resultado) 
+
+    def test_no_hay_fichas(self):
+        self.board = Board()
+        for i in range(24):
+            self.board.__contenedor__[i] = [f for f in self.board.__contenedor__[i] if f != "Blancas"]
+        self.assertTrue(self.board.no_hay_fichas("Blancas"))
+        self.assertFalse(self.board.no_hay_fichas("Negras")) 
+
+    def test_reserva(self):
+        self.board = Board()
+        reserva = self.board.reserva()
+        self.assertEqual(reserva, {"Negras": 0, "Blancas": 0})
+        self.board.__reserva__["Negras"] += 1
+        self.assertEqual(self.board.__reserva__["Negras"], 1)
+
+    def test_get_contenedor(self):
+        self.board = Board()
+        contenedor = self.board.get_contenedor()
+        self.assertIsInstance(contenedor, list)
+        self.assertEqual(len(contenedor), 24)
+        self.assertEqual(contenedor[0], ["Negras"]*2)
+
+
 if __name__ == "__main__":
      unittest.main()
