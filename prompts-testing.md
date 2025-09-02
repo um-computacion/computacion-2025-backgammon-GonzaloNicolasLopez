@@ -1,3 +1,4 @@
+IA utilizada
 CHAT GPT -4.1
 
 dame un test de la clase player 
