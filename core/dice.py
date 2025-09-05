@@ -8,9 +8,10 @@ class Dice:
     def tirar(self):
         self.__dado1__ = random.randint(1, 6)
         self.__dado2__ = random.randint(1, 6)
-        self.__movimiento__ = [self.__dado1__, self.__dado2__]
+        if self.__dado1__ == self.__dado2__:
+            self.__movimiento__ = [self.__dado1__] * 4
+        else:
+            self.__movimiento__ = [self.__dado1__, self.__dado2__]
     
-        
-
-
-    
+    def obtener_movimiento(self):
+        return self.__movimiento__    
