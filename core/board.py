@@ -43,15 +43,19 @@ class Board:
         return True 
     
     def comer_ficha(self, destino, fichas):
-        if len(self.__contenedor__[destino]) == 1 and self.__contenedor__[destino][0] != fichas:
-            rival = self.__contenedor__[destino] [0]
-            self.__reserva__[rival] += 1
-            self.__contenedor__[destino] = [fichas] 
-        if  self.__contenedor__[destino] == None:
+        try:
+            if len(self.__contenedor__[destino]) == 1 and self.__contenedor__[destino][0] != fichas:
+                rival = self.__contenedor__[destino] [0]
+                self.__reserva__[rival] += 1
+                self.__contenedor__[destino] = [fichas] 
+            if  self.__contenedor__[destino] == None:
+                return False 
+            if len(self.__contenedor__[destino]) >=2:
+                raise ValueError("No se puede mover a esa posición")
+                return False
+        except (ValueError, AttributeError) as e:
+            print(f"Error: {e}")
             return False 
-        if len(self.__contenedor__[destino]) >=2:
-            return False
-        return False 
     
     def reserva(self):
         self.__reserva__ ={"Negras":0, "Blancas":0}

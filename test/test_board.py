@@ -84,6 +84,17 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(len(contenedor), 24)
         self.assertEqual(contenedor[0], ["Negras"]*2)
 
+    def test_comer_ficha_vacio(self):
+        self.board = Board()
+        self.board.__contenedor__[5] = []
+        resultado = self.board.comer_ficha(5, "Blancas")
+        self.assertFalse(resultado)
+
+    def test_comer_muchas_fichas(self):
+        self.board = Board()
+        self.board.__contenedor__[6] = ["Negras", "Negras"]
+        resultado = self.board.comer_ficha(6, "Blancas")
+        self.assertFalse(resultado)
 
 if __name__ == "__main__":
      unittest.main()
