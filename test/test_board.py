@@ -34,8 +34,6 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.__contenedor__[23], ["Blancas"]*2)
 
 
-
-   
     def test_mover_ficha_fuera_de_rango(self):
         board = Board()
         resultado = board.mover_ficha(-1, 5, "Blancas")
