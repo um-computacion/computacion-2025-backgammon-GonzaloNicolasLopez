@@ -40,6 +40,14 @@ class TestDice(unittest.TestCase):
             self.assertEqual(str(e), "error!!")
         self.assertTrue(mock_randint.called)
         self.assertEqual(mock_randint.call_count, 1) 
-        
+
+    def test_dado_doble(self):
+        dado = Dice()
+        dado.tirar()
+        dado.__dado1__ = 2
+        dado.__dado2__ = 2
+        dado.__movimiento__ = [2,2,2,2]
+        self.assertNotEqual(dado.obtener_movimiento(), [4, 4, 4, 4])
+
 if __name__ == "__main__":
     unittest.main()
