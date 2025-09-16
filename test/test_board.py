@@ -2,6 +2,9 @@ import unittest
 from core.board import Board
 
 class TestBoard(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.board.reserva()    
 
     def test_sin_ficha(self):
         board = Board()
@@ -93,6 +96,13 @@ class TestBoard(unittest.TestCase):
         self.board.__contenedor__[6] = ["Negras", "Negras"]
         resultado = self.board.comer_ficha(6, "Blancas")
         self.assertFalse(resultado)
+
+    def test_movimiento_correcto(self):
+        self.assertTrue(self.board.movimiento_correcto(5, 6, "Blancas"))
+        self.assertFalse(self.board.movimiento_correcto(1, 2, "Blancas"))
+        self.board.__contenedor__[8] = ["Negras", "Negras"]
+        self.assertFalse(self.board.movimiento_correcto(5, 8, "Blancas"))    
+
 
 if __name__ == "__main__":
      unittest.main()
