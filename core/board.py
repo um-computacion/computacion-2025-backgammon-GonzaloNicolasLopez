@@ -64,7 +64,26 @@ class Board:
     def get_contenedor(self):
         return self.__contenedor__
 
-
+    def movimiento_correcto(self, origen, destino, color):
+        if origen == -1:
+            if 0 <= destino < len(self.__contenedor__):
+                return True
+            return False
+        if not (0 <= origen < len(self.__contenedor__)):
+            return False
+        if not (0 <= destino < len(self.__contenedor__)):
+            return False
+        inicio = self.__contenedor__[origen]
+        fin = self.__contenedor__[destino]
+        if not inicio:
+            return False
+        if not fin:
+            return True
+        if fin[0] == color:
+            return True
+        if len(fin) == 1 and fin[0] != color:
+            return True
+        return False
         
 
          

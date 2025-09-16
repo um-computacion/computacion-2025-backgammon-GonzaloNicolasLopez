@@ -9,7 +9,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_str(self):
         jugador = Player("Ana", "negro")
-        self.assertEqual(str(jugador), "Ana negro")
+        self.assertEqual(jugador.__str__(), "Jugador, Ana, Ficha: negro")
 
     def test_tener_nombre(self):
         jugador = Player("Juan", "Blancas")
@@ -22,8 +22,8 @@ class TestPlayer(unittest.TestCase):
     def test_jugadores(self):
         player1 = Player("Juan", "Blancas")
         player2 = Player("Ana", "Negras")
-        self.assertEqual(str(player1),"Jugador, Juan, Ficha: Blancas")
-        self.assertEqual(str(player2), "Jugador, Ana, Ficha: Negras")
+        self.assertEqual(player1.tener_nombre(), "Juan")
+        self.assertEqual(player2.tener_nombre(), "Ana")
 
 
 if __name__ == "__main__":
