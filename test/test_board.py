@@ -36,6 +36,23 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.__contenedor__[12], ["Blancas"]*5)
         self.assertEqual(board.__contenedor__[23], ["Blancas"]*2)
 
+    def test_mover_ficha(self):
+        board = Board()
+        destino = 10
+        origen = 5
+        self.board.mover_ficha(origen, destino, "Blancas")
+        self.assertEqual(self.board.__contenedor__[origen], ["Blancas"]*4)
+        self.assertEqual(self.board.__contenedor__[destino], ["Blancas"])
+
+
+    def test_mover_ficha2(self):
+        board = Board()
+        destino = 7
+        origen = 5
+        self.board.mover_ficha(origen, destino, "Blancas")
+        self.assertEqual(self.board.__contenedor__[origen], ["Blancas"]*4)
+        self.assertEqual(self.board.__contenedor__[destino], ["Blancas"]*4)
+   
 
     def test_mover_ficha_fuera_de_rango(self):
         board = Board()
@@ -54,6 +71,17 @@ class TestBoard(unittest.TestCase):
         resultado =board.mover_ficha(2, 3, "Blancas")
         self.assertFalse(resultado)
 
+    def test_distancia_incorrecta_blancas(self):
+        board = Board()
+        origen = 10
+        destino = 5
+        self.assertFalse(board.mover_ficha(origen, destino, "Blancas"))
+
+    def test_distancia_incorrecta_negras(self):
+        board = Board()
+        origen = 5
+        destino = 10
+        self.assertFalse(board.mover_ficha(origen, destino, "Negras"))
 
     def test_comer_ficha(self):
         self.board = Board()
@@ -91,6 +119,7 @@ class TestBoard(unittest.TestCase):
         resultado = self.board.comer_ficha(5, "Blancas")
         self.assertFalse(resultado)
 
+    
     def test_comer_muchas_fichas(self):
         self.board = Board()
         self.board.__contenedor__[6] = ["Negras", "Negras"]
@@ -102,7 +131,8 @@ class TestBoard(unittest.TestCase):
         self.assertFalse(self.board.movimiento_correcto(1, 2, "Blancas"))
         self.board.__contenedor__[8] = ["Negras", "Negras"]
         self.assertFalse(self.board.movimiento_correcto(5, 8, "Blancas"))    
-
+        self.board.__reserva__["Blancas"] += 1
+        self.assertFalse(self.board.movimiento_correcto(5, 6, "Blancas"))
 
 if __name__ == "__main__":
      unittest.main()

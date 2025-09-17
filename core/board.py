@@ -1,6 +1,7 @@
 class Board:
     def __init__(self):
-        
+
+        self.__reserva__ ={"Negras":0, "Blancas":0}
         self.__contenedor__ =[
         [],[],[],[],[],[],  [],[],[],[],[],[], [],[],[],[],[],[],  [],[],[],[],[],[]
         ]
@@ -19,21 +20,20 @@ class Board:
         origen = int(origen)
         if origen < 0 or origen > 23 or destino < 0 or destino > 23:
             return False
-        if color == "Blancas" and destino <= origen :
+        elif color == "Blancas" and destino <= origen :
             return False
-        if color == "negras" and destino >= origen :
+        elif color == "Negras" and destino >= origen :
             return False
-        if not self.__contenedor__[origen] :
+        elif not self.__contenedor__[origen] :
             return False 
-        if  self.__contenedor__[origen][0] != color:
+        elif  self.__contenedor__[origen][0] != color:
             return False
         else:
             if self.__contenedor__[destino] == []:
                self.__contenedor__[destino] = [color]
-               self.__contenedor__[origen].pop()
-            if self.__contenedor__[destino][0] == color:    
-                 self.__contenedor__[destino].append(color)
-                 self.__contenedor__[origen].pop()
+            elif self.__contenedor__[destino][0] == color:    
+                self.__contenedor__[destino].append(color)
+            self.__contenedor__[origen].pop()
 
 
     def no_hay_fichas(self, fichas):
@@ -43,19 +43,15 @@ class Board:
         return True 
     
     def comer_ficha(self, destino, fichas):
-        try:
-            if len(self.__contenedor__[destino]) == 1 and self.__contenedor__[destino][0] != fichas:
-                rival = self.__contenedor__[destino] [0]
-                self.__reserva__[rival] += 1
-                self.__contenedor__[destino] = [fichas] 
-            if  self.__contenedor__[destino] == None:
-                return False 
-            if len(self.__contenedor__[destino]) >=2:
-                raise ValueError("No se puede mover a esa posición")
-                return False
-        except (ValueError, AttributeError) as e:
-            print(f"Error: {e}")
+        if len(self.__contenedor__[destino]) == 1 and self.__contenedor__[destino][0] != fichas:
+            rival = self.__contenedor__[destino] [0]
+            self.__reserva__[rival] += 1
+            self.__contenedor__[destino] = [fichas] 
+        elif  self.__contenedor__[destino] == []:
             return False 
+        elif len(self.__contenedor__[destino]) >=2:
+            return False
+        
     
     def reserva(self):
         self.__reserva__ ={"Negras":0, "Blancas":0}
@@ -65,23 +61,21 @@ class Board:
         return self.__contenedor__
 
     def movimiento_correcto(self, origen, destino, color):
-        if origen == -1:
-            if 0 <= destino < len(self.__contenedor__):
-                return True
+        if self.__reserva__[color] > 0:
             return False
-        if not (0 <= origen < len(self.__contenedor__)):
+        elif not (0 <= origen < len(self.__contenedor__)):
             return False
-        if not (0 <= destino < len(self.__contenedor__)):
+        elif not (0 <= destino < len(self.__contenedor__)):
             return False
         inicio = self.__contenedor__[origen]
         fin = self.__contenedor__[destino]
         if not inicio:
             return False
-        if not fin:
+        elif not fin:
             return True
-        if fin[0] == color:
+        elif fin[0] == color:
             return True
-        if len(fin) == 1 and fin[0] != color:
+        elif len(fin) == 1 and fin[0] != color:
             return True
         return False
         
