@@ -32,3 +32,9 @@ class Backgammon:
     def turno(self):
         return self.__turno__
     
+    def get_dados(self):
+        return self.__dados__
+    
+    def resto_dados(self):
+        return self.__dados__.obtener_movimiento() 
+    

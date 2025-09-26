@@ -45,6 +45,11 @@ class TestBackgammon(unittest.TestCase):
         self.assertIsInstance(turno, Player)
         self.assertEqual(turno.tener_nombre(), "Pedro")
         self.assertEqual(turno.tener_color(), "Negras")
+        
+    def test_get_dados(self):
+        game = Backgammon("Gonzalo", "Pedro")
+        game.dados_tirados() 
+        self.assertTrue(game.get_dados(),all(1 <= x <= 6 for x in game.dados_tirados())) 
 
 if __name__ == "__main__":
     unittest.main()
