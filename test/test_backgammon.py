@@ -2,6 +2,7 @@ import unittest
 from core.backgammon import Backgammon
 from core.player import Player
 from core.board import Board
+from unittest.mock import patch
 
 class TestBackgammon(unittest.TestCase):
     def test_init(self):
@@ -33,11 +34,17 @@ class TestBackgammon(unittest.TestCase):
         tablero = game.tablero()
         self.assertIsInstance(tablero, Board)
 
-    def tirar_dados(self):
+    def test_tirar_dados(self):
         game = Backgammon("Gonzalo", "Pedro")
         game.dados_tirados()
         self.assertTrue(game.dados_tirados(),all(1 <= x <= 6 for x in game.dados_tirados()))
 
+    def test_turno(self):
+        game = Backgammon("Gonzalo", "Pedro")
+        turno = game.turno()
+        self.assertIsInstance(turno, Player)
+        self.assertEqual(turno.tener_nombre(), "Pedro")
+        self.assertEqual(turno.tener_color(), "Negras")
 
 if __name__ == "__main__":
     unittest.main()
