@@ -28,9 +28,14 @@ class Backgammon:
         self.__dados__.tirar()
         return self.__dados__.obtener_movimiento()
 
-
     def turno(self):
         return self.__turno__
+    
+    def especificar_turno(self):
+        if self.__turno__ == self.__jugador1__:
+            self.__turno__ = self.__jugador2__
+        else:
+            self.__turno__ = self.__jugador1__
     
     def get_dados(self):
         return self.__dados__
