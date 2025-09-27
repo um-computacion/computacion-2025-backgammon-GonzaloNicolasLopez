@@ -51,5 +51,13 @@ class TestBackgammon(unittest.TestCase):
         game.dados_tirados() 
         self.assertTrue(game.get_dados(),all(1 <= x <= 6 for x in game.dados_tirados())) 
 
+    def test_especificar_turno(self):
+        game = Backgammon("Gonzalo", "Pedro")
+        self.assertEqual(game.turno().tener_nombre(), "Pedro")
+        game.especificar_turno()
+        self.assertEqual(game.turno().tener_nombre(), "Gonzalo") 
+        game.especificar_turno()
+        self.assertEqual(game.turno().tener_nombre(), "Pedro")
+
 if __name__ == "__main__":
     unittest.main()
